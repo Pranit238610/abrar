@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <h1>Breathe Better,<br>Live Smarter.</h1>
+    <p>Real-time air quality index and pollution data for cities worldwide.</p>
+
+    <div class="search-container">
+        <input type="text" id="city-search" class="search-input"
+            placeholder="Search for a city (e.g., Delhi, London)...">
+        <button id="search-btn" class="btn-primary search-btn">Search</button>
+    </div>
+</section>
+
+<div id="loading" style="display: none; text-align: center; margin-top: 2rem;">
+    <p>Loading data...</p>
+</div>
+
+<div id="error-msg" style="display: none; text-align: center; margin-top: 2rem; color: var(--danger);"></div>
+
+<div id="results-grid" class="results-grid">
+    <!-- Results will be injected here by JS -->
+</div>
+
+<script>
+    // Auto-search if URL has search parameter
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        if (searchQuery) {
+            document.getElementById('city-search').value = searchQuery;
+            document.getElementById('search-btn').click();
+        }
+    });
+</script>
+{% endblock %}
